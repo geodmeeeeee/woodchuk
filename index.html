@@ -1,0 +1,77 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <meta name="description" content="Simple game grid">
+  <title>Games</title>
+  <link rel="stylesheet" href="styles.css">
+</head>
+<body>
+  <main class="container">
+    <div class="search-toolbar">
+      <div class="search-wrap">
+        <label class="sr-only" for="search">Search games</label>
+        <input id="search" type="search" placeholder="Search games..." autocomplete="off">
+        <span class="search-icon" aria-hidden="true">⌕</span>
+      </div>
+      <div class="filter-control">
+        <button id="filterToggle" class="filter-toggle" type="button" aria-haspopup="dialog" aria-expanded="false" aria-controls="filterPanel">Filter</button>
+        <dialog id="filterPanel" class="filter-dialog" aria-labelledby="filterHeading">
+          <div class="filter-dialog-header">
+            <h2 id="filterHeading">Categories</h2>
+            <button id="filterClose" class="filter-close" type="button">Close</button>
+          </div>
+          <fieldset>
+            <legend class="sr-only">Choose categories</legend>
+            <div id="filterOptions" class="filter-options"></div>
+          </fieldset>
+          <div class="filter-actions">
+            <button id="clearFilters" class="clear-filters" type="button">Clear filters</button>
+            <button id="filterDone" class="filter-done" type="button">Done</button>
+          </div>
+        </dialog>
+      </div>
+      <button id="changelogOpen" class="changelog-open" type="button" aria-haspopup="dialog" aria-controls="changelogDialog">Changelog</button>
+    </div>
+
+    <dialog id="changelogDialog" class="changelog-dialog" aria-labelledby="changelogHeading">
+      <button id="changelogClose" class="changelog-close" type="button">Close</button>
+      <h2 id="changelogHeading">Changelog</h2>
+      <pre id="changelogText" class="changelog-document">Loading changelog...</pre>
+    </dialog>
+
+    <div id="gameGrid" class="game-grid" aria-live="polite"></div>
+
+    <nav id="pagination" class="pagination" aria-label="Game pages" hidden>
+      <button id="previousPage" class="page-arrow" type="button" aria-label="Previous page">Previous</button>
+      <div id="pageNumbers" class="page-numbers" aria-label="Pages"></div>
+      <button id="nextPage" class="page-arrow" type="button" aria-label="Next page">Next</button>
+      <div class="page-jump">
+        <label for="pageInput">Go to page</label>
+        <input id="pageInput" type="number" min="1" value="1" required>
+        <span id="pageCount">of 1</span>
+      </div>
+    </nav>
+
+    <div id="emptyState" class="empty-state" hidden>No games found.</div>
+  </main>
+
+  <dialog id="gameDialog" class="game-dialog" aria-labelledby="gameHeading">
+    <div class="game-player-shell">
+      <div class="game-player-toolbar">
+        <h2 id="gameHeading" class="game-player-title"></h2>
+        <div class="game-player-controls">
+          <button id="gameMute" class="game-player-button" type="button" aria-pressed="false">Mute</button>
+          <button id="gameFullscreen" class="game-player-button" type="button">Fullscreen</button>
+          <button id="gameClose" class="game-player-button game-player-close" type="button">Close</button>
+        </div>
+      </div>
+      <iframe id="gameFrame" class="game-frame" title="Game" sandbox="allow-scripts allow-same-origin allow-forms allow-pointer-lock allow-orientation-lock allow-presentation allow-downloads" allow="autoplay; fullscreen; gamepad" allowfullscreen></iframe>
+    </div>
+  </dialog>
+
+  <script src="games.js"></script>
+  <script src="app.js"></script>
+</body>
+</html>
